@@ -1,9 +1,9 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { UseApp } from '../contexts/AppContext';
 
-export function NavBar() {
+export const NavBar: FC = () => {
 	const { menu } = UseApp();
 	return (
 		<>
@@ -12,18 +12,16 @@ export function NavBar() {
 					? menu.map((el, idx) => {
 							const url = `/${el.toLowerCase()}`;
 							return (
-								<>
-									<NavElement key={idx + el}>
-										<NavLink to={url}>{el}</NavLink>
-									</NavElement>
-								</>
+								<NavElement key={idx + el}>
+									<NavLink to={url}>{el}</NavLink>
+								</NavElement>
 							);
 					  })
 					: null}
 			</Navbar>
 		</>
 	);
-}
+};
 
 const Navbar = styled.ul`
 	display: flex;

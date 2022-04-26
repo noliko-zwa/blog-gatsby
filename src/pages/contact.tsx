@@ -1,9 +1,10 @@
-import { UseApp } from "../contexts/AppContext";
+import data from '../../content/data.json';
+import React, { FC } from 'react';
+import { Layout } from '../components/Layout';
 
-function contact() {
-  const { contact } = UseApp();
-  const data = contact;
-  return <>{data}</>;
-}
+const contact: FC = () => {
+	const { contact } = data;
+	return <Layout>{contact}</Layout>;
+};
 
 export default contact;

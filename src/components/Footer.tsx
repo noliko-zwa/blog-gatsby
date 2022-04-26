@@ -1,13 +1,12 @@
-
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { UseApp } from '../contexts/AppContext';
-import { ThemeType } from '../style/theme';
+import { ThemeType } from './style/theme';
 
-export function Footer() {
+export const Footer: FC = () => {
 	const { copyright } = UseApp();
 	return <StyledFooter>{copyright}</StyledFooter>;
-}
+};
 
 const StyledFooter = styled.div<{ theme: ThemeType }>`
 	position: absolute;

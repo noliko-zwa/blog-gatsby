@@ -1,12 +1,14 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import { UseApp } from "../contexts/AppContext";
+import data from '../../content/data.json';
+import React, { FC } from 'react';
+import { Layout } from '../components/Layout';
 
-export default function Cv() {
-  return (
-    <Layout>
-      <h2>cv</h2>
-      {/* return <div>hi {cv[0]["name"] }</div>; */}
-    </Layout>
-  );
+export default function cv() {
+	const { cv } = data;
+	return (
+		<Layout>
+			<div> {cv[0]['artistName']}</div>
+			<div> {cv[0]['name']}</div>
+			<div> {cv[0]['bio']}</div>
+		</Layout>
+	);
 }

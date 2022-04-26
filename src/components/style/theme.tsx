@@ -1,4 +1,3 @@
-
 export const theme = {
 	breakPoint: {
 		mobile: 576,

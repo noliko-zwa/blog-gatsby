@@ -3,32 +3,39 @@ import * as React from 'react';
 import { NavBar } from './NavBar';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Footer } from './Footer';
-import datas from '../data.json';
+import datas from '../../content/data.json';
 import { AppContext, AppContextList } from '../contexts/AppContext';
-import { theme, ThemeType } from '../style/theme';
+import { theme, ThemeType } from './style/theme';
+import { FC } from 'react';
+import { Helmet } from 'react-helmet';
 interface Props {
 	children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+export const Layout: FC<Props> = ({ children }) => {
 	const staticProps = datas as AppContextList;
 	const currentRoute = window.location.pathname;
 	return (
-		<ThemeProvider theme={theme}>
-			<AppContext.Provider value={staticProps}>
-				<LayoutStyle />
-				{currentRoute === '/' ? <Headline>{staticProps.title}</Headline> : null}
-				<NavBar />
-				{children}
-				<Footer />
-			</AppContext.Provider>
-		</ThemeProvider>
+		<>
+			<Helmet>
+				<link href="typography.css" rel="stylesheet" />
+			</Helmet>
+			<ThemeProvider theme={theme}>
+				<AppContext.Provider value={staticProps}>
+					<LayoutStyle />
+					{currentRoute === '/' ? (
+						<Headline>{staticProps.title}</Headline>
+					) : null}
+					<NavBar />
+					{children}
+					<Footer />
+				</AppContext.Provider>
+			</ThemeProvider>
+		</>
 	);
-}
+};
 
 const LayoutStyle = createGlobalStyle<{ theme: ThemeType }>`
-@import "../style/typography.css";
-
 	body {
   text-align: center;
   font-size: ${({ theme }) => theme.fontsize.m}px;

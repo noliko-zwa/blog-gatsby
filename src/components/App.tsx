@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { UseApp } from '../contexts/AppContext';
 
-export const App =()=> {
+export const App:FC =()=> {
 	const { title, works } = UseApp();
 	const artworksTitles = works
 		?.map((el) => el.title)
@@ -11,11 +11,11 @@ export const App =()=> {
 		.join(' / ');
 	return (
 		<>
-			<title>{title}</title>
+			<title>hi</title>
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			<ArtWorkList>
 				<ArtWorkLink to='/work'>
-					{artworksTitles}
+					work
 				</ArtWorkLink>
 			</ArtWorkList>
 		</>
