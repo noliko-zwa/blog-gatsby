@@ -3,6 +3,7 @@ import * as React from 'react';
 import { NavBar } from './NavBar';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Footer } from './Footer';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import datas from '../../content/data.json';
 import { AppContext, AppContextList } from '../contexts/AppContext';
 import { theme, ThemeType } from './style/theme';
@@ -14,6 +15,15 @@ interface Props {
 
 export const Layout: FC<Props> = ({ children }) => {
 	const staticProps = datas as AppContextList;
+	const data = useStaticQuery(graphql`
+		query {
+			site {
+				siteMetadata {
+					title
+				}
+			}
+		}
+	`);
 	const currentRoute = window.location.pathname;
 	return (
 		<>
@@ -24,7 +34,7 @@ export const Layout: FC<Props> = ({ children }) => {
 				<AppContext.Provider value={staticProps}>
 					<LayoutStyle />
 					{currentRoute === '/' ? (
-						<Headline>{staticProps.title}</Headline>
+						<Headline>{data.site.siteMetadata.title}</Headline>
 					) : null}
 					<NavBar />
 					{children}
